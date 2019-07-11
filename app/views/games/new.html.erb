@@ -1,0 +1,22 @@
+<body class="home">
+
+<div class="container"></div>
+
+<div class="login-wrap">
+      <div class="login-html">
+<%= nested_form_for @game do |f| %>
+  <p>
+    <strong><%= f.label :Game_Name %></strong><br>
+    <%= f.text_field :name %>
+  </p>
+    <strong><%= f.label :Players%> (Max 25)</strong><br>
+<%= f.fields_for :players do |task_form| %>
+  <%= task_form.text_field :name %>
+  <%= task_form.link_to_remove "Remove player", class: "btn btn-danger" %>
+<% end %>
+<p><%= f.link_to_add "Add player", :players, class: "btn btn-primary" %></p>
+<%= f.submit class: "btn btn-success" %>
+<%= link_to 'Back', games_path, class: "btn btn-warning"%><% end %>
+</div>
+</div>
+</body>

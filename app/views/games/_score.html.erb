@@ -1,0 +1,6 @@
+<div class="row">
+	<% game.players.each do |player| %>
+		<div class="col-md-3"><%= player.scores.sum(:value) %>
+		</div>
+	<% end %>
+</div>

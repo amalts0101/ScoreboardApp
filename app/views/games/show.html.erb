@@ -1,0 +1,52 @@
+<link href='https://fonts.googleapis.com/css?family=Arvo:700' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Raleway:300,100' rel='stylesheet' type='text/css'>
+<h1>Add Scores</h1>
+<body class="blur">
+	<div class="col-md-3 offset-6">
+	<button id="my_id" onclick = "winner()" class = "btn btn-warning">End Game</button>
+	</div>
+<%=form_tag "/games/#{@game.id}/rounds",id: "formscore", method: :post, remote: true do |f|%>
+ <div class="container">
+ 	<div class="row">
+ 		<% @game.players.each do |player| %>
+ 			<div class="col-md-3">
+ 				<strong><%= player.name %></strong>	
+   				<%= text_field_tag "score[#{player.id}]" %>
+   				<i class="mdi mdi-gamepad-variant"></i>
+   			</div>
+        <% end %>
+ 	</div>
+ 	<div id="scores">
+ 		<%= render 'score', game: @game %>
+ 	</div>
+ 	<div class="row">
+ 		<div class="col-md-3 offset-3">
+			<%= submit_tag 'Add score', id:"add", class: "btn btn-success", style: "display: #{@game.status == 'Finished' ? 'none' : 'block'}"%> 
+		</div>
+ 	</div>
+ </div>
+ <div class="wrap winner" id="showwinner" style="display: <%= @game.status == 'Finished' ? 'block' : 'none'%>">
+  <h1>Winner is <%= @winner.name %> </h1>
+</div>
+<%end%>
+<script type="text/javascript">
+	function winner(){
+	var addbutton = document.getElementById("add");
+	var showwinner = document.getElementById("showwinner");
+	addbutton.style.display = "none";
+	showwinner.style.display = "block";
+	}
+
+	// Prevent Enter Key 
+	$(document).ready(function() {
+  	$(window).keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</body>
+
+

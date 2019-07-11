@@ -1,0 +1,45 @@
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.3.1/css/all.min.css" rel="stylesheet">
+<body class="bg-default home">
+  <div class="main-content">
+    <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+      <div class="container-fluid">
+       <h2 class="mb-5 text-white">Games</h2>
+       <%= link_to 'Create Game+', new_game_path, class: "btn btn-success", style: "margin-left: 90%;"%>
+         <div class="header-body">
+           <div class="row" style="display: contents;">
+               <div class="col-xl-3 col-lg-6" style="display: contents;">
+               	<% @games.each do |game| %>
+                 <div class="card card-stats mb-4 mb-xl-0">
+                   <div class="card-body">
+                     <div class="row">
+                       <div class="col">
+                       <h5 class="card-title text-uppercase text-muted mb-0">No of Players: <%= game.players.count %></h5>
+                       <span class="h2 font-weight-bold mb-0"><%= game.name %></span>
+                       </div>
+                         <div class="col-auto">
+						  		<a href="<%=game_path(game)%>" style="text-decoration:none;" class="button">Add Score!</a>
+                         </div>
+                       </div>
+                      <p class="mt-3 mb-0 text-muted text-sm">
+                      <span class="text-nowrap">Created at : <%= game.created_at.strftime("%Y-%m-%d")%></span>
+                      </p>
+                     </div>
+                   </div>
+                    <%end%>
+               </div>
+             </div>
+           </div>
+        </div>
+     </div>
+   </div>
+  </div>
+</div>
+<!-- Page content -->
+</div>
+</body>
